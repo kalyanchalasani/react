@@ -2,26 +2,27 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import { activateGeod, closeGeod } from './redux';
+import { activateAction, closeAction, resetAction } from './redux';
 
 // App.js
 export class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.props.geod.title || 'Hello World!'}</h1>
+        <h1>{this.props.customAction.title || 'Hello World!'}</h1>
 
-        {this.props.geod.title ? (
-          <button onClick={this.props.closeGeod}>Exit Geod</button>
+        {this.props.customAction.title ? (
+          <button onClick={this.props.closeAction}>Close</button>
         ) : (
           <button
             onClick={() =>
-              this.props.activateGeod({ title: 'I am a geo dude!' })
+              this.props.activateAction({ title: 'Activated!' })
             }
           >
             Click Me!
           </button>
         )}
+          <button onClick={this.props.resetAction}>Reset</button>
       </div>
     );
   }
@@ -29,12 +30,13 @@ export class App extends React.Component {
 
 // AppContainer.js
 const mapStateToProps = state => ({
-  geod: state.geod,
+  customAction: state.customAction,
 });
 
 const mapDispatchToProps = {
-  activateGeod,
-  closeGeod,
+  activateAction,
+  closeAction,
+  resetAction,
 };
 
 const AppContainer = connect(

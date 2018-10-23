@@ -4,22 +4,30 @@ import {
 } from 'redux';
 
 // actions.js
-export const activateGeod = geod => ({
-  type: 'ACTIVATE_GEOD',
-  geod,
+export const activateAction = customAction => ({
+  type: 'ACTIVATE_ACTION',
+  customAction,
 });
 
 
-export const closeGeod = () => ({
-  type: 'CLOSE_GEOD',
+export const closeAction = () => ({
+  type: 'CLOSE_ACTION',
+});
+
+export const resetAction = customAction => ({
+  type: 'RESET_ACTION',
+  title: 'reset state',
+  customAction,
 });
 
 // reducers.js
-export const geod = (state = {}, action) => {
+export const customAction = (state = {}, action) => {
   switch (action.type) {
-    case 'ACTIVATE_GEOD':
-      return action.geod;
-    case 'CLOSE_GEOD':
+    case 'ACTIVATE_ACTION':
+      return action.customAction;
+    case 'RESET_ACTION':
+      return state;
+    case 'CLOSE_ACTION':
       return {};
     default:
       return state;
@@ -28,7 +36,7 @@ export const geod = (state = {}, action) => {
 
 
 export const reducers = combineReducers({
-  geod,
+  customAction,
 });
 
 // store.js
